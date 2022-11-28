@@ -1,6 +1,8 @@
-import { addProduct, products } from "./products/product.service";
+import { addProduct, findProducts, products, updateProduct } from "./products/product.service";
 import { faker } from '@faker-js/faker';
+import { Product } from "./products/product.model";
 
+//Create Products
 for(let i = 0; i < 50; i++) {
     addProduct({
         description: faker.commerce.productDescription(),
@@ -16,4 +18,17 @@ for(let i = 0; i < 50; i++) {
     })
 }
 
-console.log(products);
+//Update Products
+const product:Product = products[0];
+
+const updatedProduct = updateProduct(product.id, {
+    title: 'New Title',
+    stock: 80,
+});
+
+//Find products
+const items = findProducts({
+    color: 'white',
+});
+
+console.log(items);
